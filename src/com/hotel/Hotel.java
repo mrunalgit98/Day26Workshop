@@ -1,14 +1,12 @@
 package com.hotel;
-
-public class Hotel {
-
-        String hotelName;
-        int rating; int weekdayRate; int weekendRate;int specialWeekdayRate;int specialWeekendRate;int avgRate = weekdayRate + weekendRate;
+class Hotel {
+    String hotelName;
+    int rating; int weekdayRate; int weekendRate;int specialWeekdayRate;int specialWeekendRate;int avgRate = weekdayRate + weekendRate;
+    private int specialAvgRate;
 
     public Hotel(String hotelName, int rating, int weekdayRate, int weekendRate, int specialWeekdayRate, int specialWeekendRate) {
         this.hotelName = hotelName; this.rating = rating; this.weekdayRate = weekdayRate;  this.weekendRate = weekendRate;this.specialWeekdayRate = specialWeekdayRate;
-        this.specialWeekendRate = specialWeekendRate;
-    }
+        this.specialWeekendRate = specialWeekendRate; this.specialAvgRate = specialWeekdayRate + specialWeekendRate;}
     public int getAvgRate() {
         return avgRate;
     }
@@ -34,5 +32,10 @@ public class Hotel {
     public int getSpecialWeekendRate() {return specialWeekendRate;}
     public void setSpecialWeekendRate(int specialWeekendRate) {this.specialWeekendRate = specialWeekendRate;}
 
-
+    public int getSpecialAvgRate() {
+        return specialAvgRate;
     }
+    public void setSpecialAvgRate(int specialAvgRate) {
+        this.specialAvgRate = specialAvgRate;
+    }
+}
