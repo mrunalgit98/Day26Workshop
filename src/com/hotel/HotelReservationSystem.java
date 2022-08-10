@@ -88,6 +88,27 @@ public class HotelReservationSystem {
         } else {
             System.out.println("The cheapest hotel is " + hotelObjList.get(0).getHotelName() + ", Rating " + hotelObjList.get(0).getRating() + ", Total Rates = $" + (hotelObjList.get(0).getWeekdayRate() + hotelObjList.get(0).getWeekendRate()));
             return hotelObjList.get(0).getWeekdayRate() + hotelObjList.get(0).getWeekendRate();}}
+    public int findBestRatedHotel(String d1, String d2) {//Uc7
+        int weekEnds = 0;
+        DayOfWeek day1 = LocalDate.parse(d1).getDayOfWeek();
+        DayOfWeek day2 = LocalDate.parse(d2).getDayOfWeek();
+        if (day1.equals(DayOfWeek.SUNDAY) || day1.equals(DayOfWeek.SATURDAY)) {
+            weekEnds++;
+        }
+        if (day2.equals(DayOfWeek.SUNDAY) || day2.equals(DayOfWeek.SATURDAY)) {
+            weekEnds++;
+        }
+        List<Hotel> hotelObjList = hotelReservation.values().stream().sorted(Comparator.comparing(Hotel -> Hotel.rating)).collect(Collectors.toList());
+        if (weekEnds == 0) {
+            System.out.println(" The Best Rated hotel is: " + hotelObjList.get(2).getHotelName() + ", Rating: " + hotelObjList.get(2).getRating() + ", Total Rates = $" + hotelObjList.get(2).getWeekdayRate() * 2);
+            return hotelObjList.get(2).getWeekdayRate() * 2;
+        }
+        if (weekEnds == 2) {
+            System.out.println(" The Best Rated hotel is: " + hotelObjList.get(2).getHotelName() + ", Rating: " + hotelObjList.get(2).getRating() + ", Total Rates = $" + hotelObjList.get(2).getWeekendRate() * 2);
+            return hotelObjList.get(2).getWeekendRate() * 2;
+        } else {
+            System.out.println(" The Best Rated hotel is: " + hotelObjList.get(2).getHotelName() + ", Rating: " + hotelObjList.get(2).getRating() + ", Total Rates = $" + (hotelObjList.get(2).getWeekdayRate() + hotelObjList.get(2).getWeekendRate()));
+            return (hotelObjList.get(2).getWeekdayRate() + hotelObjList.get(2).getWeekendRate());  } }
 
     public static void main(String[] args) {
         System.out.println("Welcome to the Hotel Reservation System");
@@ -96,5 +117,7 @@ public class HotelReservationSystem {
         hotel.enterDates();
         hotel.findCheapestHotelForWeekdayAndWeekend("2022-11-12","2022-11-21");
         hotel.findCheapestBestBestRatedHotel("2022-11-12","2022-11-21");
+        hotel.findBestRatedHotel("2022-11-12","2022-11-21");
     }
+
 }
